@@ -9,9 +9,14 @@ public class PedidoService {
         System.out.println("Total: " + pedido.getTotal());
         System.out.println("Guardando en la base de datos");
 
-        if (pedido.getTotal() > 100) {
+        if (pedido.getTotal() > 120) {
             NotificadorMail n1 = new NotificadorMail();
             n1.enviar(pedido.getCorreo(), "Se ha creado un pedido para ser atendido");
+
+        } else if (pedido.getTotal() <= 50){
+
+            NotificadorWhatsapp nw = new NotificadorWhatsapp();
+            nw.enviar(pedido.getTelefono(), "Se ha creado un pedido para ser atendido");
 
         } else {
             NotificadorSms ns = new NotificadorSms();
